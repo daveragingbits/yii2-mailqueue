@@ -92,7 +92,7 @@ class MailQueue extends Mailer
 		$success = true;
 		
 		$items = Queue::find()->where(['and', ['sent_time' => NULL], ['<', 'attempts', $this->maxAttempts]])->orderBy(['created_at' => SORT_ASC])->limit($this->mailsPerRound)->all();
-		// dd($items);
+
 		if(!empty($items)) {
 			foreach($items as $item) {
 				if($message = $item->toMessage()) {
